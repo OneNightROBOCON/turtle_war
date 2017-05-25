@@ -31,8 +31,8 @@ press 'i' GOGO turtlebot in gazebo~!!
 maybe
 
 ## Env
-OS  : Ubuntu 14.04
-ROS : indigo
-GAZEBO : 2.
+- OS  : Ubuntu 14.04
+- ROS : indigo
+- GAZEBO : 2.
 
 
