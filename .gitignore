@@ -1,3 +1,7 @@
+#add yamaguchi
+*.swp
+*~
+
 # Prerequisites
 *.d
 
