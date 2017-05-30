@@ -15,6 +15,7 @@ from geometry_msgs.msg import (
 )
 
 
+TIME = 200
 def spawn_gazebo_models(name="candy", 
                         model_type="ball",
                         model_pose=Pose(position=Point(x=0.6725, y=0.1265, z=0.7825)),
@@ -75,7 +76,7 @@ def make_candy():
     candy_id = 0
     candy_dict ={}
     start_time = time.time()
-    while time.time() - start_time < 20: 
+    while time.time() - start_time < TIME: 
         _x = random.uniform(MIN_X,MAX_X)
         _y= random.uniform(MIN_Y,MAX_Y)
         spawn_candy_name = "candy_" + str(candy_id)
