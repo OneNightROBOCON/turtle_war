@@ -1,0 +1,15 @@
+<launch>
+  <!--  <arg name="world_file"  default="$(env TURTLEBOT_GAZEBO_WORLD_FILE)"/> -->
+  <arg name="world_file"  default="$(find turtle_war)/world/field_v0.world"/>
+  <arg name="gui" default="true"/>
+
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="use_sim_time" value="true"/>
+    <arg name="debug" value="false"/>
+    <arg name="gui" value="$(arg gui)" />
+    <arg name="world_name" value="$(arg world_file)"/>
+  </include>
+
+  <node pkg="turtle_war" type="makeCandy.py" name="makeCandy"/>
+  
+</launch>
