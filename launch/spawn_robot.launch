@@ -15,7 +15,7 @@
     <param name="publish_frequency" type="double" value="30.0" />
   </node>
   
-  <node pkg="turtle_war" type="randomBot.py" name="randomBot"/>
+  <!--node pkg="turtle_war" type="randomBot.py" name="randomBot"/>-->
 
   <!-- Fake laser -->
   <node pkg="nodelet" type="nodelet" name="laserscan_nodelet_manager" args="manager"/>
