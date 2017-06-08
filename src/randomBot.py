@@ -3,6 +3,7 @@
 import rospy
 import rospkg
 import random
+import time
 
 from abstractBot import *
 
@@ -11,7 +12,6 @@ from geometry_msgs.msg import Twist
 class RandomBot(AbstractBot):
     
     def strategy(self):
-    
         r = rospy.Rate(100)
         
         target_speed = 0
@@ -21,31 +21,36 @@ class RandomBot(AbstractBot):
 
         surplus = 0
 
-        update = True
+        UPDATE_FREQUENCY = 1
+        update_time = 0
 
         while not rospy.is_shutdown():
-            
-            value = random.randint(0,1000)
-
-            mod = 4
-            if update:
-                surplus = value%mod
-                update = False
-            
-            if surplus == 0:
-                x = 1
-                th = 0
-
-            elif surplus == 1:
+            if self.center_bumper or self.left_bumper or self.right_bumper:
+                update_time = time.time()
+                rospy.loginfo('bumper hit!!')
                 x = 0
                 th = 3
+                control_speed = -1
+                control_turn = 0
+            
+            elif time.time() - update_time > UPDATE_FREQUENCY:
+                update_time = time.time()
+                
+                value = random.randint(1,1000)
+                if value < 500:
+                    x = 1
+                    th = 0
 
-            elif surplus == 2:
-                x = 0
-                th = -3
-            else:
-                x = 0
-                th = 0
+                elif value < 750:
+                    x = 0
+                    th = 3
+
+                elif value < 1000:
+                    x = 0
+                    th = -3
+                else:
+                    x = 0
+                    th = 0
 
             target_speed = x
             target_turn = th
@@ -56,7 +61,6 @@ class RandomBot(AbstractBot):
                 control_speed = max( target_speed, control_speed - 0.02 )
             else:
                 control_speed = target_speed
-                update = True
 
             if target_turn > control_turn:
                 control_turn = min( target_turn, control_turn + 0.1 )
@@ -64,13 +68,12 @@ class RandomBot(AbstractBot):
                 control_turn = max( target_turn, control_turn - 0.1 )
             else:
                 control_turn = target_turn
-                update = True
 
             twist = Twist()
             twist.linear.x = control_speed; twist.linear.y = 0; twist.linear.z = 0
             twist.angular.x = 0; twist.angular.y = 0; twist.angular.z = control_turn
+            #print(twist)
         
-            
             self.vel_pub.publish(twist)
 
             r.sleep()

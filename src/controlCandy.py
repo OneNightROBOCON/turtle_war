@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-
+import os
 import rospy
 import math
 import rospkg
@@ -32,7 +32,13 @@ class controlCandy(object):
 
         sub = rospy.Subscriber('/gazebo/model_states', ModelStates, self.callback)
 
-        self.delete_th = 0.5
+        self.delete_th = 0.3
+
+        self.start_flag = False
+
+        self.start_time = 0
+
+        #self.save_dir = './result/'
 
     def spawn_gazebo_models(self,name='candy',
                             model_type='ball',
@@ -75,6 +81,10 @@ class controlCandy(object):
             respRobot = self.get_model_state(self.robot_name,'')
             
             if respRobot.success:
+                if not self.start_flag:
+                    self.start_time = time.time()
+                    self.start_flag = True
+                    
                 robot_pose = respRobot.pose
                 for candy_num in range(self.spawn_candy_num):
                     
@@ -87,8 +97,18 @@ class controlCandy(object):
                             if distance < self.delete_th:
                                 print("delete model")
                                 self.delete_gazebo_models(candy_id)
-                                self.candy_list.remove(candy_id)                
-
+                                self.candy_list.remove(candy_id)
+            """        
+            if len(self.candy_list) ==0:
+                end_time = time.time() - self.start_time
+                if not os.path.isdir(self.save_dir):
+                    print('make dir: ' + self.save_dir)
+                    os.makedirs(self.save_dir)
+                f = open(self.save_dir + 'resulr.txt', 'w') # 書き込みモードで開く
+                f.write(str(end_time)) # 引数の文字列をファイルに書き込む
+                f.close()
+            """
+            
     def distance(self,p1,p2):
         diffX = p1.position.x - p2.position.x
         diffY = p1.position.y - p2.position.y
