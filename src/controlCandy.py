@@ -98,6 +98,10 @@ class controlCandy(object):
                                 print("delete model")
                                 self.delete_gazebo_models(candy_id)
                                 self.candy_list.remove(candy_id)
+                                self.delete_gazebo_models(candy_id)
+                                if len(self.candy_list)==0:
+                                    rospy.loginfo('All candy was Deleted COMPLETE!! time: ' + str(time.time() - self.start_time) )
+
             """        
             if len(self.candy_list) ==0:
                 end_time = time.time() - self.start_time
