@@ -96,7 +96,6 @@ class controlCandy(object):
                             distance = self.distance(robot_pose, respCandy.pose)
                             if distance < self.delete_th:
                                 print("delete model")
-                                self.delete_gazebo_models(candy_id)
                                 self.candy_list.remove(candy_id)
                                 self.delete_gazebo_models(candy_id)
                                 if len(self.candy_list)==0:
