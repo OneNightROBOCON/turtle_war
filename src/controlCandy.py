@@ -134,7 +134,7 @@ class controlCandy(object):
 if __name__ == '__main__':
     rospy.init_node('check_candy')
     cc = controlCandy()
-    cc.make_candy(5)
+    cc.make_candy(12)
 
     rospy.spin()
     
