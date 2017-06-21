@@ -5,7 +5,7 @@ OneNightROBOCON競技「turtle war」プロジェクト
 
 現状は、自律移動を練習する簡易版として、単体でキャンディをさがして集めるゲームになっています。
 
-TODO [ここにサンプルを動かしたときの動画を貼る]
+![demo](turtle_war_demo.gif)
 
 ## Quick Start
 最後までできてロボットを動かせれば当日までの準備はOKです。
