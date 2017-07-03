@@ -1,6 +1,0 @@
-<launch>
-  <!-- turtlebot_teleop_key already has its own built in velocity smoother -->
-  <node pkg="turtle_war" type="randamWalk.py" name="randam_walk"  output="screen">
-    <remap from="randam_walk/cmd_vel" to="/mobile_base/commands/velocity"/>
-  </node>
-</launch>

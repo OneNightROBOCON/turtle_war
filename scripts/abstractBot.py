@@ -14,11 +14,8 @@ class AbstractBot(object):
         self.bumper = BumperEvent()
         self.center_bumper = False
         self.left_bumper = False
-        self.right_bumper = False
-        #self.vel_pub = rospy.Publisher('/cmd_vel_mux/input/teleop', Twist,queue_size=1)
         self.vel_pub = rospy.Publisher('/mobile_base/commands/velocity', Twist,queue_size=1)
         self.bumper_sub = rospy.Subscriber('/mobile_base/events/bumper', BumperEvent, self.bumperCallback)
-        self.gazebo_sub = rospy.Subscriber('/gazebo/model_states', ModelStates, self.gazeboCallback)
 
     def bumperCallback(self, data):
         if data.bumper == 0:
@@ -38,11 +35,6 @@ class AbstractBot(object):
                 self.right_bumper = True
             else:
                 self.right_bumper = False
-        
-    def gazeboCallback(self, data):
-        pass
-
-
 
     @abstractmethod
     def strategy(self):

@@ -6,7 +6,6 @@ import random
 import time
 
 from abstractBot import *
-
 from geometry_msgs.msg import Twist
 
 class RandomBot(AbstractBot):
@@ -80,7 +79,5 @@ class RandomBot(AbstractBot):
 
 if __name__ == '__main__':
     rospy.init_node('random_bot')
-
     bot = RandomBot('Random')
-
     bot.strategy()
