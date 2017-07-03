@@ -32,7 +32,7 @@ class RoboCtrl
 			char c;
 			int kfd = 0;
 			struct termios cooked,raw;
-			togetattr(kfd, &cooked);
+			tcgetattr(kfd, &cooked);
 			memcpy(&raw,&cooked,sizeof(struct termios));
 			raw.c_lflag &=~(ICANON|ECHO);
 			raw.c_cc[VEOL] = 1;

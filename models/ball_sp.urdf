@@ -8,18 +8,18 @@
     <visual>
       <origin xyz="0.0 0.0 0.0"/>
       <geometry>
-        <sphere radius="0.1" />
+        <sphere radius="0.07" />
       </geometry>
     </visual>
     <collision>
       <origin xyz="0.0 0.0 0.0"/>
       <geometry>
-        <sphere radius="0.1" />
+        <sphere radius="0.07" />
       </geometry>
     </collision>
   </link>
   <gazebo reference="ball">
-    <material>Gazebo/Red</material>
+    <material>Gazebo/Yellow</material>
      <mu1>0.01</mu1>
      <mu2>0.01</mu2>
      <gravity>True</gravity>
