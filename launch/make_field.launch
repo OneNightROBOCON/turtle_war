@@ -11,5 +11,4 @@
   </include>
 
   <node pkg="turtle_war" type="controlCandy.py" name="controlCandy" output="screen"/>
-  
 </launch>

@@ -131,9 +131,11 @@ class controlCandy(object):
                         if candy.is_special:
                             self.score += 5
                             self.get_sp_candy_num += 1
+                            rospy.loginfo('Get SP Candy : ' + str(self.score))
                         else:
                             self.score += 1
                             self.get_candy_num += 1
+                            rospy.loginfo('Get Candy    : ' + str(self.score))
                 elif candy.state ==2: # to_delete
                     pass
                 elif candy.state ==3: # deleting
