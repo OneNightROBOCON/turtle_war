@@ -70,6 +70,7 @@ Ubuntu 14.04の場合
 参考URL http://shumilinux.blogspot.jp/2015/08/ubuntu-1404-lts-opencv.html
 ```
 sudo apt-get -y install libopencv-dev build-essential cmake git libgtk2.0-dev pkg-config python-dev python-numpy libdc1394-22 libdc1394-22-dev libjpeg-dev libpng12-dev libtiff4-dev libjasper-dev libavcodec-dev libavformat-dev libswscale-dev libxine-dev libgstreamer0.10-dev libgstreamer-plugins-base0.10-dev libv4l-dev libtbb-dev libqt4-dev libfaac-dev libmp3lame-dev libopencore-amrnb-dev libopencore-amrwb-dev libtheora-dev libvorbis-dev libxvidcore-dev x264 v4l-utils unzip
+```
 cd ~
 wget https://github.com/opencv/opencv/archive/2.4.11.zip
 unzip 2.4.11.zip
@@ -102,7 +103,45 @@ PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/local/lib/pkgconfig
 export PKG_CONFIG_PATH
 ```
 
-### 3. このリポジトリをクローン
+
+Ubuntu 16.04の場合
+参考URL http://shumilinux.blogspot.jp/2016/07/ubuntu-1604-lts-opencv.html
+```
+sudo apt-get -y install libopencv-dev build-essential cmake git libgtk2.0-dev pkg-config python-dev python-numpy libdc1394-22 libdc1394-22-dev libjpeg-dev libpng12-dev libtiff5-dev libjasper-dev libavcodec-dev libavformat-dev libswscale-dev libxine2-dev libgstreamer0.10-dev libgstreamer-plugins-base0.10-dev libv4l-dev libtbb-dev libqt4-dev libfaac-dev libmp3lame-dev libopencore-amrnb-dev libopencore-amrwb-dev libtheora-dev libvorbis-dev libxvidcore-dev x264 v4l-utils unzip
+```
+cd ~
+wget https://github.com/opencv/opencv/archive/2.4.13.zip
+unzip 2.4.13.zip
+cd opencv-2.4.13/
+mkdir build
+cd build/
+cmake -D WITH_TBB=ON -D BUILD_NEW_PYTHON_SUPPORT=ON -D WITH_V4L=ON -D INSTALL_C_EXAMPLES=ON -D INSTALL_PYTHON_EXAMPLES=ON -D BUILD_EXAMPLES=ON -D WITH_QT=ON -D WITH_OPENGL=ON -D WITH_VTK=ON ..
+make
+sudo make install
+```
+Pathの設定
+```
+sudo gedit /etc/ld.so.conf.d/opencv.conf
+```
+開いたらファイルの一番下に以下を追加
+```
+/usr/local/lib
+```
+追加して保存したら、再度ターミナルで
+```
+sudo ldconfig
+```
+最後に
+```
+sudo gedit /etc/bash.bashrc
+```
+bash.bashrcを開いたらファイルの一番下に以下を追加
+```
+PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/local/lib/pkgconfig
+export PKG_CONFIG_PATH
+```
+
+### 4. このリポジトリをクローン
 turtlr_war リポジトリをクローンします。
 先程作ったワークスペースの`src/`の下においてください。
 ```
@@ -110,14 +149,14 @@ cd ~/catkin_ws/src
 git clone https://github.com/dashimaki360/turtle_war.git
 ```
 
-### 4. make
+### 5. make
 
 ```
 cd ~/catkin_ws
 catkin_make
 ```
 
-### 5. サンプルの実行
+### 6. サンプルの実行
 サンプルの実行します。うまく行けばインストール終了です。
 
 ```
