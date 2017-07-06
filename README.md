@@ -67,10 +67,10 @@ sudo apt-get install ros-indigo-turtlebot ros-indigo-turtlebot-apps ros-indigo-t
 
 ## 3. OpenCVのインストール
 Ubuntu 14.04の場合
+
 参考URL http://shumilinux.blogspot.jp/2015/08/ubuntu-1404-lts-opencv.html
 ```
 sudo apt-get -y install libopencv-dev build-essential cmake git libgtk2.0-dev pkg-config python-dev python-numpy libdc1394-22 libdc1394-22-dev libjpeg-dev libpng12-dev libtiff4-dev libjasper-dev libavcodec-dev libavformat-dev libswscale-dev libxine-dev libgstreamer0.10-dev libgstreamer-plugins-base0.10-dev libv4l-dev libtbb-dev libqt4-dev libfaac-dev libmp3lame-dev libopencore-amrnb-dev libopencore-amrwb-dev libtheora-dev libvorbis-dev libxvidcore-dev x264 v4l-utils unzip
-```
 cd ~
 wget https://github.com/opencv/opencv/archive/2.4.11.zip
 unzip 2.4.11.zip
@@ -108,7 +108,6 @@ Ubuntu 16.04の場合
 参考URL http://shumilinux.blogspot.jp/2016/07/ubuntu-1604-lts-opencv.html
 ```
 sudo apt-get -y install libopencv-dev build-essential cmake git libgtk2.0-dev pkg-config python-dev python-numpy libdc1394-22 libdc1394-22-dev libjpeg-dev libpng12-dev libtiff5-dev libjasper-dev libavcodec-dev libavformat-dev libswscale-dev libxine2-dev libgstreamer0.10-dev libgstreamer-plugins-base0.10-dev libv4l-dev libtbb-dev libqt4-dev libfaac-dev libmp3lame-dev libopencore-amrnb-dev libopencore-amrwb-dev libtheora-dev libvorbis-dev libxvidcore-dev x264 v4l-utils unzip
-```
 cd ~
 wget https://github.com/opencv/opencv/archive/2.4.13.zip
 unzip 2.4.13.zip
