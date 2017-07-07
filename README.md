@@ -65,7 +65,16 @@ sudo apt-get upgrade
 sudo apt-get install ros-indigo-turtlebot ros-indigo-turtlebot-apps ros-indigo-turtlebot-interactions ros-indigo-turtlebot-simulator ros-indigo-kobuki-ftdi ros-indigo-rocon-remocon ros-indigo-rocon-qt-library ros-indigo-ar-track-alvar-msgs
 ```
 
-### 3. このリポジトリをクローン
+### 3. OpenCVのインストール
+openCVに必要なnumpyのインストール
+```
+sudo apt-get install python-numpy
+```
+openCVのインストール
+```
+sudo apt-get install python-opencv
+```
+### 4. このリポジトリをクローン
 turtlr_war リポジトリをクローンします。
 先程作ったワークスペースの`src/`の下においてください。
 ```
@@ -73,14 +82,14 @@ cd ~/catkin_ws/src
 git clone https://github.com/OneNightROBOCON/turtle_war
 ```
 
-### 4. make
+### 5. make
 
 ```
 cd ~/catkin_ws
 catkin_make
 ```
 
-### 5. サンプルの実行
+### 6. サンプルの実行
 サンプルの実行します。うまく行けばインストール終了です。
 
 ```

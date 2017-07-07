@@ -2,11 +2,14 @@
 # -*- coding: utf-8 -*-
 import os
 import rospy
+import cv2
+import numpy as np
 import math
 import rospkg
 import copy
 import random
 import time
+import threading
 from gazebo_msgs.msg import ModelStates
 from geometry_msgs.msg import (
     Pose,
@@ -53,6 +56,8 @@ class controlCandy(object):
         self.score = 0
         self.get_candy_num = 0
         self.get_sp_candy_num = 0
+
+        self.TEAM_NAME = 'Default'
 
     def spawn_gazebo_models(self,name='candy',
                             model_type='ball',
@@ -198,25 +203,71 @@ class controlCandy(object):
                 rospy.loginfo('NEXT CANDY IS SPECIAL!!' )
 
     def chekeTimeup(self):
-        if self.start_flag == True and self.end_flag == False:
-            passed_time = time.time() - self.start_time
-            if  passed_time > self.TIME_LIMIT:
-                rospy.loginfo('!!!!!!!!!!!!! Time is Up !!!!!!!!!!!!!' )
-                rospy.loginfo('  SCOREx : ' + str(self.score) )
-                rospy.loginfo('  Candyx : ' + str(self.get_candy_num) )
-                rospy.loginfo('SP Candy : ' + str(self.get_sp_candy_num) )
-                rospy.loginfo('!!!!!!!!!!!!!     end    !!!!!!!!!!!!!' )
-                self.end_flag = True
+        font = cv2.FONT_HERSHEY_PLAIN
+        """
+        font = cv2.FONT_HERSHEY_COMPLEX
+        font = cv2.FONT_HERSHEY_COMPLEX_SMALL
+        font = cv2.FONT_HERSHEY_DUPLEX
+        font = cv2.FONT_HERSHEY_PLAIN
+        font = cv2.FONT_HERSHEY_SCRIPT_COMPLEX
+        font = cv2.FONT_HERSHEY_SCRIPT_SIMPLEX
+        font = cv2.FONT_HERSHEY_SIMPLEX
+        font = cv2.FONT_HERSHEY_TRIPLEX
+        font = cv2.FONT_ITALIC
+        """
+        font_size = 5
+        time_color = (255,255,0)
+        score_color = (255,255,0)
+        r = rospy.Rate(60)
+        while not rospy.is_shutdown():
+            if self.start_flag == True and self.end_flag == False:
+                passed_time = time.time() - self.start_time
+                remaining_time = round(self.TIME_LIMIT - passed_time,2)
+                im = np.zeros((480,640,3))
+                
+                remainig_time_text = str(remaining_time)
+                if  passed_time > self.TIME_LIMIT:
+                    rospy.loginfo('!!!!!!!!!!!!! Time is Up !!!!!!!!!!!!!' )
+                    rospy.loginfo('  SCOREx : ' + str(self.score) )
+                    rospy.loginfo('  Candyx : ' + str(self.get_candy_num) )
+                    rospy.loginfo('SP Candy : ' + str(self.get_sp_candy_num) )
+                    rospy.loginfo('!!!!!!!!!!!!!     end    !!!!!!!!!!!!!' )
+                    self.end_flag = True
+
+                    remainig_time_text = "! Time is Up !"
+                    
+                    cv2.putText(im,remainig_time_text,(30,230),font, 5,time_color)
+                else:
+                    cv2.putText(im,remainig_time_text,(180,230),font, 5,time_color)
+                
+                
+                if passed_time > self.TIME_LIMIT*0.8:
+                    time_color = (0,0,255)
+                elif passed_time > self.TIME_LIMIT*0.5:
+                    time_color = (0,255,255)
+                
+                cv2.putText(im,'Player: ' + self.TEAM_NAME,(10,50),font, 4,score_color)
+
+                cv2.putText(im,'Remaining Time:',(10,130),font, 4,score_color)   
+                cv2.putText(im,'SCOREx : ' + str(self.score),(10, 350),font, 5,score_color)
+                cv2.putText(im,'  Candyx : ' + str(self.get_candy_num) ,(150, 400),font,2,score_color)
+                cv2.putText(im,'SP Candy : ' + str(self.get_sp_candy_num) ,(150, 450),font, 2,score_color)
+                cv2.imshow("",im)
+                cv2.waitKey(3)
+                r.sleep()
 
 if __name__ == '__main__':
     rospy.init_node('check_candy')
     cc = controlCandy()
     cc.initCandy(20)
 
+    th_view = threading.Thread(target=cc.chekeTimeup, name="th_view", args=())
+    th_view.start()
+
     r = rospy.Rate(60)
     while not rospy.is_shutdown():
         cc.deleteAndTheSpawn()
         cc.chekeSpCandyTime()
-        cc.chekeTimeup()
+        #cc.chekeTimeup()
         r.sleep()
 
