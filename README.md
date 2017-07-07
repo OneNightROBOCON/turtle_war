@@ -70,7 +70,7 @@ turtlr_war リポジトリをクローンします。
 先程作ったワークスペースの`src/`の下においてください。
 ```
 cd ~/catkin_ws/src
-git clone https://github.com/dashimaki360/turtle_war.git
+git clone https://github.com/OneNightROBOCON/turtle_war
 ```
 
 ### 4. make
