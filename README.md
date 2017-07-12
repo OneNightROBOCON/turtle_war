@@ -59,6 +59,8 @@ source ~/.bashrc
 ### 2. タートルボットパッケージのインストール
 タートルボット関連のパッケージのインストール
 
+以下`6.サンプルの実行`までは一括スクリプトがあります。`setting_for_robocon.sh`　もろもろインストールしてサンプルの実行まで動きます。
+
 ```
 sudo apt-get update
 sudo apt-get upgrade
