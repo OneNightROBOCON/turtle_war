@@ -27,7 +27,7 @@ class AbstractBot(object):
         self.bridge = CvBridge()
 
         # velocity publisher
-        self.vel_pub = rospy.Publisher('/mobile_base/commands/velocity', Twist,queue_size=1)
+        self.vel_pub = rospy.Publisher('/cmd_vel', Twist,queue_size=1)
 
         # bumper subscrivre
         self.bumper_sub = rospy.Subscriber('/mobile_base/events/bumper', BumperEvent, self.bumperCallback)
