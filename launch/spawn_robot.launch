@@ -14,6 +14,7 @@
   <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher">
     <param name="publish_frequency" type="double" value="30.0" />
   </node>
+  <node pkg="turtle_war" type="velControl.py" name="limit"/>
 
   <include file="$(find turtle_war)/launch/yourBot.launch">
   </include>
