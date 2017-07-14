@@ -22,7 +22,7 @@ def subpub_callback(data):
 	elif control_turn > 0.5:
 			control_turn = 3
 
-	vel_pub = rospy.Publisher('cmd_vel_mux/input/teleop', Twist)
+	vel_pub = rospy.Publisher('cmd_vel_mux/input/teleop', Twist, queue_size=1)
 	twist = Twist()
 	twist.linear.x = control_speed
 	twist.linear.y = 0
