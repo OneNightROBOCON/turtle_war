@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+
+<!-- Launches Kobuki Gazebo simulation in an empty world -->
+<launch>
+   
+  <!-- spawn the robot -->
+  <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-file $(find rulo_simulation)/Rulo/Rulo.urdf -urdf -x 0 -y -0.4856 -z 0.249897 -Y 1.5950 -model Rulo"/>
+
+  <!-- spawn the carpet -->
+  <!--
+  <node name="spawn_carpet" pkg="gazebo_ros" type="spawn_model" args="-file ~/.gazebo/models/Carpet/model_1-4.sdf -sdf -x 0.53627 -y -0.909144 -z 0 -model Rulo"/>
+  -->
+  
+
+<!--
+rosrun gazebo_ros spawn_model -file /home/kina/.gazebo/models/Cable_r/model.sdf -sdf -x 0.616006 -y -0.985583 -z 0.00 -model Cable
+-->
+  <node pkg="tf" type="static_transform_publisher" name="laser_base_transformation1" args="0.275 0 0 0 0 0 /base_link /laser_link 50"/>
+<!--
+  <node pkg="tf" type="static_transform_publisher" name="laser_base_transformation2" args="0.0 0 0 0 0 0 /map /odom 50"/>
+
+  <node pkg="tf" type="static_transform_publisher" name="laser_base_transformation3" args="0.0 0 0 0 0 0 Rulo/base_link /laser_link 50"/>
+-->
+  <node pkg="tf" type="static_transform_publisher" name="laser_base_transformation3" args="0.0 0 0 0 0 0 /base_link /base_footprint 10"/>
+
+  <node pkg="turtle_war" type="randomRulo.py" name="randomRulo" output="screen"/>
+
+  <node pkg="image_view" type="image_view" name="image_view" >
+    <remap from="image" to="/Rulo/camera/image_raw"/>
+    <!--<param name="autosize" value="true"/>-->
+  </node>
+</launch>
+
