@@ -223,5 +223,5 @@ roslaunch turtle_war make_field_rulo.launch
 ```
 別ターミナルでロボットの生成
 ```
-roslaunch turtle_war make_field_rulo.launch 
+roslaunch turtle_war spawn_rulo.launch
 ```
