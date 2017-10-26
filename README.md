@@ -212,3 +212,16 @@ turtle_war/
 - ROS : indigo
 - GAZEBO : 2
 - Python : 2.7
+
+## OnigiriWar
+機体をTurtleBotからRuloに変更
+※Ruloのgazeboモデルとrulo_msgsが別途必要
+起動手順
+環境の生成
+```
+roslaunch turtle_war make_field_rulo.launch 
+```
+別ターミナルでロボットの生成
+```
+roslaunch turtle_war make_field_rulo.launch 
+```
